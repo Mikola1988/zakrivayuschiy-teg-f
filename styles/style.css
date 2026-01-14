@@ -131,6 +131,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: var(--block-width);
+  margin: 0 auto;
+  max-width: 100%;
 }
 
 /* КАРТОЧКИ */
@@ -252,6 +255,10 @@
   display: flex;
   align-items: center;
   gap: var(--like-button-gap);
+}
+
+.card__like-container_7path {
+  filter: invert(1);
 }
 
 /* КНОПКА С ИКОНКОЙ СЕРДЦА */

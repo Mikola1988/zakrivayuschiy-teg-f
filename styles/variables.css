@@ -41,11 +41,11 @@
 
   --like-button-width: 130px;
   --like-button-height: 38px;
-  --like-button-gap: 10px;
+  --like-button-gap: 8px;
   --like-button-border: 2px solid var(--black);
 
-  --like-icon-width: 27px;
-  --like-icon-height: 24px;
+  --like-icon-width: 39px;
+  --like-icon-height: 36px;
 
   --like-text-font-size: 14px;
   --like-text-line-height: 0.9;
