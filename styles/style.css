@@ -1,9 +1,10 @@
 @import url("./variables.css");
-@import url("./animations.css");
 
 /* ГРАДИЕНТ */
 .page {
   background-image: var(--bg-gradient);
+  background-size: 100% 100%;
+  background-position: 0 0;
   background-attachment: fixed;
   min-height: 100vh;
   font-family: var(--main-font-family);
@@ -14,13 +15,14 @@
   width: 100%;
   max-width: 100vw;
   margin: 0 auto;
+  overflow-x: hidden;
 }
 
 /* МОДАЛЬНОЕ ОКНО */
 .modal {
   position: fixed;
   margin: auto;
-  border: 2px solid var(--black);
+  border: var(--button-border);
   background: var(--white);
   padding: 0;
 }
@@ -46,14 +48,6 @@
   box-sizing: border-box;
 }
 
-.modal__icon {
-  width: 39px;
-  height: 39px;
-  grid-column: 1;
-  grid-row: 1;
-  align-self: center;
-}
-
 .modal__text {
   font-family: var(--accent-font-family);
   font-size: 14px;
@@ -64,24 +58,89 @@
   grid-row: 1;
 }
 
-.modal__button {
-  grid-column: 1 / span 2;
-  grid-row: 2;
-  width: 257px;
-  height: 38px;
-  border: 2px solid var(--black);
+/* КНОПКИ */
+.button {
+  border: var(--button-border);
   background: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-family: var(--accent-font-family);
-  font-size: var(--like-text-font-size);
-  justify-self: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.modal__button:hover {
-  background: #f5f5f5;
+.button:focus {
+  outline: none;
+  box-shadow: 2px 2px 0 var(--main-color);
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--black);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+  z-index: 0;
+}
+
+.button:hover::before {
+  transform: translateX(0);
+}
+
+.button .button__text {
+  position: relative;
+  z-index: 1;
+  color: var(--white);
+  mix-blend-mode: difference;
+  transition: color 0.5s ease-in-out;
+  font-family: var(--accent-font-family);
+  font-size: var(--button-font-size);
+  line-height: var(--button-line-height);
+  /* text-transform: lowercase; */
+}
+
+.save-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: clamp(280px, 80vw, 335px);
+  height: clamp(45px, 8vw, 55px);
+  padding: 12px 18px;
+  flex-shrink: 0;
+}
+
+.save-button svg {
+  position: relative;
+  z-index: 1;
+  color: var(--black);
+  fill: var(--black);
+  mix-blend-mode: normal;
+  transition:
+    color 0.5s ease-in-out,
+    fill 0.5s ease-in-out;
+  flex-shrink: 0;
+  width: 21px;
+  height: 21px;
+}
+
+.save-button:hover svg {
+  color: var(--white);
+  fill: var(--white);
+}
+
+.modal__button {
+  width: 257px;
+  height: 38px;
+  grid-column: 1 / span 2;
+  grid-row: 2;
+  justify-self: center;
 }
 
 /* ШАПКА */
@@ -97,14 +156,9 @@
   background: var(--white);
   border: var(--title-border);
   display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.title-wrapper {
-  display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
@@ -146,10 +200,6 @@
   margin-bottom: 50px;
 }
 
-.card__title__mobile-only {
-  display: none;
-}
-
 .card__title {
   font-family: var(--main-font-family);
   font-variation-settings: "wght" var(--card-title-font-weight);
@@ -161,8 +211,6 @@
 .card__image-container {
   position: relative;
   width: 100%;
-  height: auto;
-
   border-top: var(--image-border-top);
   border-bottom: var(--image-border-bottom);
   overflow: hidden;
@@ -170,41 +218,37 @@
 
 .card__image {
   width: 100%;
-  height: 100%;
+  height: 696px;
   object-fit: cover;
   display: block;
 }
 
-.responsive-container,
-.title-card,
-.cards-container {
-  width: 100%;
-  max-width: var(--block-max-width);
-}
-
 /* ФИЛЬТРЫ КАРТОЧЕК */
-.card:nth-child(1) .card__image {
-  filter: contrast(150%) brightness(110%);
-}
-.card:nth-child(2) .card__image {
+.filter-grayscale {
   filter: grayscale(0.8) blur(1px);
 }
-.card:nth-child(3) .card__image {
+
+.filter-sepia {
   filter: sepia(0.6) saturate(200%);
 }
-.card:nth-child(4) .card__image {
+
+.filter-hue-rotate {
   filter: invert(0.1) hue-rotate(45deg);
 }
-.card:nth-child(5) .card__image {
+
+.filter-brightness {
   filter: brightness(120%) contrast(80%);
 }
-.card:nth-child(6) .card__image {
+
+.filter-blur {
   filter: blur(2px) opacity(0.9);
 }
-.card:nth-child(7) .card__image {
+
+.filter-grayscale-light {
   filter: grayscale(0.5) brightness(130%);
 }
-.card:nth-child(8) .card__image {
+
+.filter-saturate {
   filter: saturate(150%) contrast(120%);
 }
 
@@ -212,8 +256,6 @@
   position: absolute;
   top: 25px;
   right: 25px;
-  width: 98px;
-  height: 14px;
   font-family: var(--accent-font-family);
   font-size: var(--label-font-size);
   line-height: 100%;
@@ -221,9 +263,7 @@
   text-align: center;
   opacity: var(--text-opacity);
   mix-blend-mode: hard-light;
-
   -webkit-text-stroke: var(--text-stroke-width) var(--text-stroke-color);
-  /* text-stroke: var(--text-stroke-width) var(--text-stroke-color); */
   paint-order: stroke fill;
 }
 
@@ -245,22 +285,21 @@
 .card__text {
   font-family: var(--main-font-family);
   font-variation-settings: "wght" var(--card-text-font-weight);
-  font-size: clamp(16px, 2vw, 18px);
-  line-height: 1.3;
+  font-size: clamp(18px, 2vw, 18px);
+  /* line-height: 1.3; */
   color: var(--black);
-  margin: clamp(15px, 4vw, 25px);
+  margin: clamp(25px, 4vw, 25px);
 }
 
-.card__text--memories {
-  font-style: normal;
-  color: rgba(0, 0, 0);
+.card__text:last-of-type {
   padding-bottom: 25px;
+  font-style: normal;
 }
 
 .card__footer {
-  position: absolute;
-  bottom: 25px;
-  right: 25px;
+  margin: 0 25px 25px auto;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* КОНТЕЙНЕР ДЛЯ ЛАЙКОВ */
@@ -268,10 +307,6 @@
   display: flex;
   align-items: center;
   gap: var(--like-button-gap);
-}
-
-.card__like-container_7path {
-  filter: invert(1);
 }
 
 /* КНОПКА С ИКОНКОЙ СЕРДЦА */
@@ -287,6 +322,11 @@
   cursor: pointer;
 }
 
+.card__icon-button:focus {
+  outline: none;
+  border-color: var(--main-color);
+}
+
 .card__icon-button:focus-visible {
   border-color: var(--main-color);
 }
@@ -295,15 +335,6 @@
 .like-icon {
   transform-origin: center;
   transform-box: fill-box;
-}
-
-.card__icon-button:hover .like-icon {
-  transform: none;
-}
-
-.like-icon:hover {
-  animation: none;
-  transform: none;
 }
 
 .like-icon .contour {
@@ -366,98 +397,14 @@
   width: var(--like-button-width);
   height: var(--like-button-height);
   padding: 9px 17px;
-  border: var(--like-button-border);
-  background: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.card__like-button:focus,
-.save-button:focus,
-.modal__button:focus {
-  outline: none;
-  box-shadow: 2px 2px 0 var(--main-color);
-}
-
-.card__like-button::before,
-.save-button::before,
-.modal__button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--black);
-  transform: translateX(-100%);
-  transition: transform 0.5s ease-in-out;
-  z-index: 0;
-}
-
-.card__like-button:hover::before,
-.save-button:hover::before {
-  transform: translateX(0);
-}
-
-.card__like-button .button__text,
-.save-button .button__text,
-.modal__button .button__text {
-  position: relative;
-  z-index: 1;
-  color: var(--white);
-  mix-blend-mode: difference;
-  transition: color 0.5s ease-in-out;
-  font-family: var(--accent-font-family);
-  font-size: var(--like-text-font-size);
-  line-height: var(--like-text-line-height);
-  text-transform: lowercase;
 }
 
 /* КНОПКА СОХРАНЕНИЯ */
 .save-section {
   display: flex;
   justify-content: center;
-  margin-bottom: 100px;
-}
-
-.save-button {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: clamp(280px, 80vw, 335px);
-  height: clamp(45px, 8vw, 55px);
-  padding: 12px 20px;
-  border: var(--save-button-border);
-  background: var(--white);
-  position: relative;
-  overflow: hidden;
-}
-
-.save-button svg {
-  position: relative;
-  z-index: 1;
-  color: var(--black);
-  fill: var(--black);
-  mix-blend-mode: normal;
-  transition: filter 0.5s ease-in-out;
-  flex-shrink: 0;
-}
-
-.save-button:hover svg {
-  filter: invert(1);
-}
-
-.save-button .button__text {
-  font-size: var(--save-text-font-size);
-  line-height: var(--save-text-line-height);
-  text-transform: none;
-  white-space: nowrap;
+  margin: 0 auto 100px;
+  width: var(--block-width);
 }
 
 @media (max-width: 375px) {
@@ -470,22 +417,29 @@
   }
 
   .subtitle {
+    /* font-size: var(--card-text-font-size); */
     font-size: 14px;
     margin-top: 15px;
   }
 
   .card__title {
-    font-size: 16px;
+    font-size: var(--card-text-font-size);
     padding: 4px 8px;
   }
 
   .card__text {
-    font-size: 16px;
-    margin: 15px;
+    font-size: var(--card-text-font-size);
+    margin: 25px;
   }
 
-  .card__title__mobile-only {
-    display: block;
+  .card__image-container {
+    height: 371px; /* Фиксированная высота */
+  }
+
+  .card__image {
+    height: 371px; /* Фиксированная высота */
+    width: 371px; /* Фиксированная ширина */
+    object-fit: cover; /* Сохраняет пропорции, заполняя область */
   }
 
   .save-button {
@@ -495,14 +449,25 @@
     padding: 15px;
   }
 
-  .card__footer {
-    position: static;
-    margin: 25px;
-    display: flex;
-    justify-content: flex-end;
+  .save-button svg {
+    width: 28px;
+    height: 28px;
   }
 
-  .card__like-container_7path {
-    filter: invert(0);
+  .card__footer {
+    margin: 25px;
+  }
+}
+
+@media (min-width: 376px) and (max-width: 454px) {
+  .content,
+  .responsive-container,
+  .title-card,
+  .cards-container,
+  .save-section {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    box-sizing: border-box;
   }
 }

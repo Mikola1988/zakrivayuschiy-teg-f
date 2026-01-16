@@ -7,62 +7,60 @@
   --main-font-family: "Inter", sans-serif;
   --accent-font-family: "PressStart2P", fantasy;
 
+  /* ЗАДНИК */
+  --bg-size: 100% 100%;
+  --bg-position: 0 0;
+
   --bg-gradient:
     repeating-linear-gradient(to right, #d3d3d3 0 2px, transparent 2px 4px),
     repeating-linear-gradient(to bottom, #d3d3d3 0 2px, transparent 2px 4px),
     linear-gradient(180deg, #e7e7e7 0%, #e7e7e7 0.01%, #1a1a1a 100%);
 
-  --block-width: min(100%, 704px);
-  --block-max-width: 704px;
-  --block-min-width: 375px;
-  --header-height: 368px;
-  --header-padding: 98px;
-  --title-card-margin-bottom: 98px;
+  --block-width: min(100%, 702px);
+  --block-max-width: 796px;
+  --block-min-width: 377px;
 
-  --header-height: clamp(323px, 88vw, 372px);
+  /* ШАПКА ВАРИАТИВНОСТЬ*/
+  --header-height: clamp(327px, 88vw, 371px);
+  --header-padding: 100px;
   --logo-font-size: clamp(3.063rem, 2.71rem + 1.5vw, 4.063rem);
   --subtitle-font-size: clamp(0.875rem, 0.677rem + 0.85vw, 1.438rem);
-  --header-padding: clamp(1.25rem, -0.188rem + 6.12vw, 4rem);
-
-  --logo-font-size: 65px;
-  --subtitle-font-size: 23px;
   --subtitle-line-height: 1.75rem;
+  --title-card-margin-bottom: 98px;
 
+  /* добежать до канадской ГРАНИЦЫ */
   --title-border: 2px solid var(--black);
   --card-border: 2px solid var(--black);
+  --image-border-top: 2px solid var(--black);
+  --image-border-bottom: 2px solid var(--black);
+  --button-border: 2px solid var(--black);
 
+  /* ТИПОГРАФИКА */
   --card-title-font-size: 18px;
   --card-title-font-weight: 715;
   --card-text-font-size: 18px;
   --card-text-font-weight: 410;
+  --label-font-size: 14px;
+  --button-font-size: 14px;
+  --button-line-height: 0.9;
 
-  --image-border-top: 2px solid var(--black);
-  --image-border-bottom: 2px solid var(--black);
-
+  /* ЛЕЙБЛ */
   --text-stroke-color: #ffffff;
   --text-stroke-width: 1px;
   --text-opacity: 0.5;
 
-  --label-font-size: 14px;
-
+  /* Like КНОПКА */
   --like-button-width: 130px;
   --like-button-height: 38px;
   --like-button-gap: 8px;
-  --like-button-border: 2px solid var(--black);
-
   --like-icon-width: 39px;
   --like-icon-height: 36px;
 
-  --like-text-font-size: 14px;
-  --like-text-line-height: 0.9;
-
-  --contour-color: #000000;
-  --animation-fill-color: #ff0000;
-
+  /* СОХРАНИТЬ КНОПКА */
   --save-button-width: 335px;
   --save-button-height: 55px;
-  --save-button-border: 2px solid var(--black);
 
-  --save-text-font-size: 14px;
-  --save-text-line-height: 0.9;
+  /* ЦВЕТА */
+  --contour-color: #000000;
+  --animation-fill-color: #ff0000;
 }
