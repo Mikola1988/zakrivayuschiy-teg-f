@@ -41,7 +41,7 @@
   width: 353px;
   height: 191px;
   padding: 30px 40px;
-  gap: 30px;
+  /* gap: 30px; */
   box-sizing: border-box;
 }
 
@@ -53,6 +53,7 @@
   text-transform: uppercase;
   grid-column: 2;
   grid-row: 1;
+  margin-left: 20px;
 }
 
 /* КНОПКИ */
@@ -65,6 +66,7 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  transition: box-shadow 0.3s ease;
 }
 
 .button:focus {
@@ -106,8 +108,9 @@
   gap: 8px;
   width: clamp(280px, 80vw, 341px);
   height: clamp(45px, 8vw, 55px);
+  padding: 12px 20px;
   flex-shrink: 0;
-  color: var(--white);
+  /* color: var(--white); */
 }
 
 .save-button svg {
@@ -126,6 +129,7 @@
   grid-column: 1 / span 2;
   grid-row: 2;
   justify-self: center;
+  margin-top: 30px;
 }
 
 /* ШАПКА */
@@ -442,25 +446,32 @@
   .card__footer {
     margin: 25px;
   }
-
+/* при просмотре через PP модульное окно открывается верхнем слоем над слоем РР, поэтому не могу точно посмотреть (поиск в интернете и ИИ не дали решения этой проблемы). 
+Если менять в HTML на open модульное окно, то оно просто не открывается, скриншот не дает точного позиционирования, поэтому выставил по макету, вроде все совпало. */
   .modal {
-    width: 100%;
-    border: var(--button-border);
+    /* width: 100%; */
+    width: 341px;
     position: fixed;
     box-sizing: border-box;
     margin: auto 17px;
+  }
+
+  .modal__text {
+    margin: 0;
   }
 
   .modal__inner {
     width: 100%;
     height: auto;
     min-height: 191px;
-    padding: 20px;
+    padding: 30px 40px;
     box-sizing: border-box;
+    gap: 20px;
   }
 
   .modal__button {
-    width: 100%;
-    max-width: 257px;
+    width: 257px;
+    height: 38px;
+    margin-top: 10px;
   }
 }
